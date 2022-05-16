@@ -1632,7 +1632,7 @@ export class Ext extends Ecs.System<ExtEvent> {
         for (const window of this.windows.values()) {
             if (window.meta.is_client_decorated()) continue;
 
-            if (show_title) {
+            if (show_title || this.is_floating(window)) { // SHOW_TITLE_FOR_FLOATING
                 window.decoration_show(this);
             } else {
                 window.decoration_hide(this);
