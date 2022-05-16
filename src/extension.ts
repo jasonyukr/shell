@@ -1004,6 +1004,7 @@ export class Ext extends Ecs.System<ExtEvent> {
                 work = win.meta.get_workspace().index()
             }
 
+            // @ts-ignore
             for (const [_entity, compare] of this.windows.iter()) {
                 const is_same_space = compare.meta.get_monitor() === mon
                     && compare.meta.get_workspace().index() === work;
