@@ -1004,6 +1004,7 @@ export class Ext extends Ecs.System<ExtEvent> {
                 work = win.meta.get_workspace().index()
             }
 
+            // @ts-ignore
             for (const [_entity, compare] of this.windows.iter()) {
                 const is_same_space = compare.meta.get_monitor() === mon
                     && compare.meta.get_workspace().index() === work;
@@ -1632,7 +1633,7 @@ export class Ext extends Ecs.System<ExtEvent> {
         for (const window of this.windows.values()) {
             if (window.meta.is_client_decorated()) continue;
 
-            if (show_title) {
+            if (show_title || this.is_floating(window)) { // SHOW_TITLE_FOR_FLOATING
                 window.decoration_show(this);
             } else {
                 window.decoration_hide(this);
