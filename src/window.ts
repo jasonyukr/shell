@@ -101,7 +101,7 @@ export class ShellWindow {
 
         if (this.may_decorate()) {
             if (!window.is_client_decorated()) {
-                if (ext.settings.show_title()) {
+                if (ext.settings.show_title() || ext.is_floating(this)) { // SHOW_TITLE_FOR_FLOATING
                     this.decoration_show(ext);
                 } else {
                     this.decoration_hide(ext);
