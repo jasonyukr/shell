@@ -8,6 +8,7 @@ import * as result from 'result';
 import * as stack from 'stack';
 import * as geom from 'geom';
 import * as tiling from 'tiling';
+import * as Window from 'window';
 
 import type { Entity } from 'ecs';
 import type { Ext } from 'extension';
@@ -486,6 +487,17 @@ export class AutoTiler {
         this.forest.tile(ext, fork, area);
     }
 
+    control_decoration(ext: Ext, window: Window.ShellWindow, is_floating: boolean) {
+        const show_title = ext.settings.show_title();
+        if (!window.meta.is_client_decorated()) {
+            if (show_title || is_floating) {
+                window.decoration_show(ext);
+            } else {
+                window.decoration_hide(ext);
+            }
+        }
+    }
+
     toggle_floating(ext: Ext) {
         const focused = ext.focus_window();
         if (!focused) return;
@@ -504,20 +516,24 @@ export class AutoTiler {
                 const fork_entity = this.attached.get(focused.entity);
                 if (fork_entity) {
                     this.detach_window(ext, focused.entity);
+                    this.control_decoration(ext, focused, true); // SHOW_TITLE_FOR_FLOATING
                 }
             } else {
                 ext.add_tag(focused.entity, Tags.ForceTile);
                 this.auto_tile(ext, focused, false);
+                    this.control_decoration(ext, focused, false); // SHOW_TITLE_FOR_FLOATING
             }
         } else {
             if (ext.contains_tag(focused.entity, Tags.Floating)) {
                 ext.delete_tag(focused.entity, Tags.Floating);
                 this.auto_tile(ext, focused, false);
+                this.control_decoration(ext, focused, false); // SHOW_TITLE_FOR_FLOATING
             } else {
                 const fork_entity = this.attached.get(focused.entity);
                 if (fork_entity) {
                     this.detach_window(ext, focused.entity);
                     ext.add_tag(focused.entity, Tags.Floating);
+                    this.control_decoration(ext, focused, true); // SHOW_TITLE_FOR_FLOATING
                 }
             }
         }
