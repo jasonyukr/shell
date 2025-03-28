@@ -97,8 +97,9 @@ export class Indicator {
 
         // CSS Selector
         bm.addMenuItem(color_selector(ext, bm),);
-
+/*
         bm.addMenuItem(this.entry_gaps)
+*/
     }
 
     destroy() {
