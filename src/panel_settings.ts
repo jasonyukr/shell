@@ -5,7 +5,8 @@ import * as Utils from 'utils';
 import type { Ext } from './extension';
 
 const { Clutter, Gio, St } = imports.gi;
-const { PopupBaseMenuItem, PopupMenuItem, PopupSwitchMenuItem, PopupSeparatorMenuItem } = imports.ui.popupMenu;
+// const { PopupBaseMenuItem, PopupMenuItem, PopupSwitchMenuItem, PopupSeparatorMenuItem } = imports.ui.popupMenu;
+const { PopupMenuItem, PopupSwitchMenuItem } = imports.ui.popupMenu;
 const { Button } = imports.ui.panelMenu;
 const GLib: GLib = imports.gi.GLib;
 
@@ -78,13 +79,14 @@ export class Indicator {
         )
 
         bm.addMenuItem(this.toggle_tiled);
+/*
         bm.addMenuItem(floating_window_exceptions(ext, bm));
 
         bm.addMenuItem(menu_separator(''));
         bm.addMenuItem(shortcuts(bm));
         bm.addMenuItem(settings_button(bm));
         bm.addMenuItem(menu_separator(''));
-
+*/
         if (!Utils.is_wayland()) {
             this.toggle_titles = show_title(ext)
             bm.addMenuItem(this.toggle_titles);
@@ -104,6 +106,7 @@ export class Indicator {
     }
 }
 
+/*
 function menu_separator(text: any): any {
     return new PopupSeparatorMenuItem(text);
 }
@@ -206,6 +209,7 @@ function shortcuts(menu: any): any {
 
     return item;
 }
+*/
 
 function clamp(input: number, min = 0, max = 128): number {
     return Math.min(Math.max(min, input), max);
