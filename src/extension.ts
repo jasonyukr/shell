@@ -2217,6 +2217,8 @@ export class Ext extends Ecs.System<ExtEvent> {
     }
 
     auto_tile_on() {
+        if (indicator) indicator.toggle_tiled.setToggleState(false)
+/*
         this.settings.set_edge_tiling(false)
         this.hide_all_borders();
 
@@ -2248,6 +2250,7 @@ export class Ext extends Ecs.System<ExtEvent> {
         }
 
         this.register_fn(() => this.switch_to_workspace(original));
+*/
     }
 
     /** Calls a function once windows are no longer queued for movement. */
