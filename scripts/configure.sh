@@ -3,20 +3,21 @@
 set -ex
 
 shortcut_applied() {
-    # Check if user confirmed overriding shortcuts
-    if test -f "./.confirm_shortcut_change"; then
-        echo "Shortcut change already confirmed"
-        return 0
-    fi
-
-    read -p "Pop shell will override your default shortcuts. Are you sure? (y/n) " CONT
-    if test "$CONT" = "y"; then
-        touch "./.confirm_shortcut_change"
-        return 1
-    else
-        echo "Cancelled"
-        return 0
-    fi
+    # # Check if user confirmed overriding shortcuts
+    # if test -f "./.confirm_shortcut_change"; then
+    #     echo "Shortcut change already confirmed"
+    #     return 0
+    # fi
+    #
+    # read -p "Pop shell will override your default shortcuts. Are you sure? (y/n) " CONT
+    # if test "$CONT" = "y"; then
+    #     touch "./.confirm_shortcut_change"
+    #     return 1
+    # else
+    #     echo "Cancelled"
+    #     return 0
+    # fi
+    return 0
 }
 
 set_keybindings() {
