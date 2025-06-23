@@ -10,11 +10,11 @@
 }
 
 .pop-shell-border-normal {
-    border-width: 2px;
+    border-width: 3px;
 }
 
 .pop-shell-border-maximize {
-    border-width: 2px;
+    border-width: 3px;
 }
 
 .pop-shell-search-element:select{
